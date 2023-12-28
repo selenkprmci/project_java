@@ -11,9 +11,13 @@
 	<groupId>com.FoodOrderingApp</groupId>
 	<artifactId>foodApp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>foodApp</name>
+    <packaging>pom</packaging>
+    <name>foodApp</name>
 	<description>Demo project for Spring Boot</description>
-	<properties>
+    <modules>
+        <module>user-service</module>
+    </modules>
+    <properties>
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
