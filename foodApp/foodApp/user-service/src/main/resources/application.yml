@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/customer
+    url: jdbc:mysql://localhost:5432/user
     username: postgres
     password: 1234
   jpa:
