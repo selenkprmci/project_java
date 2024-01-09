@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://31.186.23.37:5432/postgres
+    username: test
+    password: 1234
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
