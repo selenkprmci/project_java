@@ -18,7 +18,8 @@
 	<modules>
 		<module>user-service</module>
 		<module>order-service</module>
-	</modules>
+        <module>restaurant-service</module>
+    </modules>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="user-service" />
         <module name="order-service" />
+        <module name="restaurant-service" />
       </profile>
     </annotationProcessing>
   </component>
@@ -16,6 +17,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="foodApp" options="" />
       <module name="order-service" options="-parameters" />
+      <module name="restaurant-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>
