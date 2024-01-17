@@ -46,7 +46,7 @@ public class CartController {
 
     // Sepeti temizleme
     @DeleteMapping("/{userId}")
-    public ResponseEntity<Void> clearCart(@PathVariable Long userId) {
+    public ResponseEntity<java.lang.Object> clearCart(@PathVariable Long userId) {
         boolean isCleared = cartService.clearCart(userId);
         if (!isCleared) {
             return ResponseEntity.notFound().build();
