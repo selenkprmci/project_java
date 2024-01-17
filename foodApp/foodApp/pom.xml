@@ -19,6 +19,7 @@
 		<module>user-service</module>
 		<module>order-service</module>
         <module>restaurant-service</module>
+        <module>payment-service</module>
     </modules>
 	<properties>
 		<java.version>17</java.version>

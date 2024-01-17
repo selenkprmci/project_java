@@ -3,10 +3,14 @@ package com.FoodOrderingApp.entity;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "menus")
 public class Menu {
 
