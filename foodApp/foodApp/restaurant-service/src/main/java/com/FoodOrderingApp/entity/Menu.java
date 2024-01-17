@@ -1,7 +1,5 @@
 package com.FoodOrderingApp.entity;
 
-
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,8 +21,7 @@ public class Menu {
 
     @ElementCollection
     @CollectionTable(name = "menu_items", joinColumns = @JoinColumn(name = "menu_id"))
-    @Column(name = "item")
-    private List<String> items;
+    private List<MenuItem> items; // items alanı MenuItem tipinde
 
     public Long getId() {
         return id;
@@ -42,13 +39,11 @@ public class Menu {
         this.restaurantId = restaurantId;
     }
 
-    public List<String> getItems() {
+    public List<MenuItem> getItems() { // Getter metodu MenuItem tipinde
         return items;
     }
 
-    public void setItems(List<String> items) {
+    public void setItems(List<MenuItem> items) { // Setter metodu MenuItem tipinde
         this.items = items;
     }
 }
-
-
