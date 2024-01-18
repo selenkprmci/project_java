@@ -53,4 +53,19 @@ public class UserService {
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+    public boolean authenticate(String username, String password) {
+        // UserRepository'den Optional<User> türünde bir değer alınır
+        Optional<User> userOptional = userRepository.findByUsername(username);
+
+        // Optional değer içindeki User nesnesini kontrol edin
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            // Şifre doğrulaması yapın (burada daha güvenli bir yöntem kullanılmalıdır)
+            if (user.getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +18,27 @@ public class UserController {
 
     private final UserService userService;
 
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login"; // login.html sayfasını döndür
+    }
+
+    @PostMapping("/login")
+    public ModelAndView login(@RequestParam("username") String username,
+                              @RequestParam("password") String password) {
+        boolean loginSuccess = userService.authenticate(username, password);
+
+        if (loginSuccess) {
+            // Giriş başarılıysa, ana sayfaya veya başka bir sayfaya yönlendir
+            return new ModelAndView("redirect:http://localhost:8083/api/restaurants/home");
+
+        } else {
+            // Giriş başarısızsa, login sayfasına geri dön ve hata mesajı göster
+            ModelAndView modelAndView = new ModelAndView("login");
+            modelAndView.addObject("error", "Invalid username or password.");
+            return modelAndView;
+        }
+    }
     // UserService enjekte edilir
     @Autowired
     public UserController(UserService userService) {
@@ -25,14 +48,15 @@ public class UserController {
     // Yeni kullanıcı oluşturma endpoint'i
 
     @PostMapping("/register")
-    public String registerUser(User user) {
+    public String registerUser(@ModelAttribute User user) {
         userService.createUser(user);
-        return "redirect:/api/users"; // Başarılı kayıttan sonra kullanıcıları listeleme sayfasına yönlendir
+        return "redirect:/api/users/login"; // Kayıttan sonra giriş sayfasına yönlendir
     }
+
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
-        return "register";
+        return "register"; // register.html sayfasını döndür
     }
 
     // Kullanıcı bilgilerini ID'ye göre getirme endpoint'i
@@ -50,13 +74,23 @@ public class UserController {
         return "users"; // templates dizinindeki 'users.html' şablonunu kullanır
     }
 
-
     // Kullanıcı güncelleme endpoint'i
-    // Burada daha fazla detay eklenebilir (örneğin, güncellenecek alanlar)
-    @PutMapping("/{userId}")
-    public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody User userDetails) {
+    @PostMapping("/update/{userId}")
+    public ModelAndView updateUser(@PathVariable Long userId, @ModelAttribute User userDetails) {
         User updatedUser = userService.updateUser(userId, userDetails);
-        return ResponseEntity.ok(updatedUser);
+        ModelAndView modelAndView = new ModelAndView("redirect:/api/users/profile/" + userId);
+        return modelAndView; // Güncelleme sonrası kullanıcının profil sayfasına yönlendir
+    }
+    @GetMapping("/update")
+    public String showUpdateForm(@PathVariable Long userId, Model model) {
+        Optional<User> user = userService.getUserById(userId);
+        if(user.isPresent()) {
+            model.addAttribute("user", user.get());
+            return "update"; // update.html sayfasını döndür
+        } else {
+
+            return "redirect:/api/users/login";
+        }
     }
 
     // Kullanıcı silme endpoint'i
