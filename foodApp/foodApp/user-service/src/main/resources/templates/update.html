@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>kullanici Guncelleme</title>
+</head>
+<body>
+<h2>kullanici Guncelleme</h2>
+<form action="/api/users/{userId}" method="post">
+  <input type="hidden" name="_method" value="put" />
+  <div>
+    <label for="userId">kullanici-ID:</label>
+    <input type="text" id="userId" name="userId" required>
+  </div>
+  <div>
+    <label for="username">kullanici Adi:</label>
+    <input type="text" id="username" name="username" required>
+  </div>
+  <div>
+    <label for="email">E-mail:</label>
+    <input type="email" id="email" name="email" required>
+  </div>
+  <div>
+
+  </div>
+  <button type="submit">Guncelle</button>
+</form>
+</body>
+</html>
