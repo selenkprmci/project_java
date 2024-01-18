@@ -5,9 +5,11 @@ import com.FoodOrderingApp.model.CartItem;
 import com.FoodOrderingApp.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 @RequestMapping("/cart")
 public class CartController {
 
@@ -23,15 +25,23 @@ public class CartController {
         }
         return ResponseEntity.ok(updatedCart);
     }
-
+    @PostMapping("/create/{userId}")
+    public ResponseEntity<Cart> createCartForUser(@PathVariable Long userId) {
+        Cart newCart = new Cart(userId);
+        // Cart nesnesini kaydetme işlemi (cartService üzerinden)
+        Cart savedCart = cartService.saveCart(newCart);
+        return ResponseEntity.ok(savedCart);
+    }
     // Kullanıcının sepetini görüntüleme
     @GetMapping("/{userId}")
-    public ResponseEntity<Cart> getCartByUserId(@PathVariable Long userId) {
+    public String getCartByUserId(@PathVariable Long userId, Model model) {
         Cart cart = cartService.getCartByUserId(userId);
         if (cart == null) {
-            return ResponseEntity.notFound().build();
+            // Sepet bulunamazsa, örneğin bir hata sayfasına yönlendirilebilir
+            return "cartNotFound";
         }
-        return ResponseEntity.ok(cart);
+        model.addAttribute("cart", cart);
+        return "cart"; // cart.html sayfasını göster
     }
 
     // Sepetten ürün çıkarma

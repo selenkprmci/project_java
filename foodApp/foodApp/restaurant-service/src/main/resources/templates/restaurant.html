@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title th:text="${restaurant.name}"></title>
+  <script>
+    function addToCart(button) {
+      var itemName = button.getAttribute('data-item-name');
+      alert(itemName + ' sepete eklendi');
+    }
+  </script>
 </head>
 <body>
 
@@ -10,18 +16,24 @@
 <p th:text="${restaurant.location}"></p>
 <p th:text="${restaurant.description}"></p>
 
-<h2>Menus:</h2>
+<h2>Menüler:</h2>
 <ul>
   <li th:each="menu : ${menus}">
     <h3 th:text="${menu.id}"></h3>
-    <!-- Display other menu details as needed -->
+    <!-- Diğer menü detaylarını burada göster -->
     <ul>
       <li th:each="item : ${menu.items}">
         <p th:text="${item.item} + ' - ' + ${item.price}"></p>
+        <button th:attr="data-item-name=${item.item}" onclick="addToCart(this)">Sepete Ekle</button>
       </li>
     </ul>
   </li>
 </ul>
+
+<!-- Sepete Git Butonu -->
+<form th:action="@{/api/menus/cart}" method="post">
+  <button type="submit">Sepete Git</button>
+</form>
 
 </body>
 </html>

@@ -63,5 +63,9 @@ public class CartService {
         }
         return false;
     }
+
+    public Cart saveCart(Cart cart) {
+        return cartRepository.save(cart);
+    }
 }
 

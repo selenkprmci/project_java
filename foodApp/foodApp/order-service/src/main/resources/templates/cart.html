@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sepetim</title>
+</head>
+<body>
+
+<h1>Sepetiniz</h1>
+
+<!-- Sepet içeriğini göster -->
+<div>
+    <h2>Ürünler:</h2>
+    <ul>
+        <li th:each="item : ${cart.cartItems}">
+            <span th:text="${item.productName}">Ürün Adı</span>
+            <span> - </span>
+            <span th:text="${item.price}">Ürün Fiyatı</span>
+            <span> x </span>
+            <span th:text="${item.quantity}">Adet</span>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>
