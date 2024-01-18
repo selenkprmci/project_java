@@ -1,7 +1,5 @@
 package com.FoodOrderingApp.service;
 
-
-
 import com.FoodOrderingApp.entity.Menu;
 import com.FoodOrderingApp.repository.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +29,9 @@ public class MenuService {
     public Menu updateMenu(Long id, Menu menuDetails) {
         Menu menu = getMenuById(id);
         menu.setItems(menuDetails.getItems());
-        // Update other fields as necessary
         return menuRepository.save(menu);
     }
+
     public List<Menu> getMenusByRestaurantId(Long restaurantId) {
         return menuRepository.findByRestaurantId(restaurantId);
     }
@@ -43,4 +41,3 @@ public class MenuService {
         menuRepository.delete(menu);
     }
 }
-
