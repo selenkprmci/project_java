@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Kullanıcı Listesi</title>
+</head>
+<body>
+<h1>Kullanıcılar</h1>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Kullanıcı Adı</th>
+    <th>Email</th>
+    <th>Rol</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="user : ${users}">
+    <td th:text="${user.id}">ID</td>
+    <td th:text="${user.username}">Kullanıcı Adı</td>
+    <td th:text="${user.email}">Email</td>
+    <td th:text="${user.role}">Rol</td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
