@@ -5,11 +5,12 @@ import com.FoodOrderingApp.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.ui.Model;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/api/restaurants")
 public class RestaurantController {
 
@@ -29,7 +30,12 @@ public class RestaurantController {
         List<Restaurant> restaurants = restaurantService.getAllRestaurants();
         return new ResponseEntity<>(restaurants, HttpStatus.OK);
     }
-
+    @GetMapping("/home")
+    public String home(Model model) {
+        List<Restaurant> restaurants = restaurantService.getAllRestaurants();
+        model.addAttribute("restaurants", restaurants);
+        return "home";
+    }
     // Tek bir restoranın detaylarını getirmek için endpoint
     @GetMapping("/{id}")
     public ResponseEntity<Restaurant> getRestaurantById(@PathVariable Long id) {
