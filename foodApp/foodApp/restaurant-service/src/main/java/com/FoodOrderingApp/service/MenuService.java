@@ -34,6 +34,9 @@ public class MenuService {
         // Update other fields as necessary
         return menuRepository.save(menu);
     }
+    public List<Menu> getMenusByRestaurantId(Long restaurantId) {
+        return menuRepository.findByRestaurantId(restaurantId);
+    }
 
     public void deleteMenu(Long id) {
         Menu menu = getMenuById(id);

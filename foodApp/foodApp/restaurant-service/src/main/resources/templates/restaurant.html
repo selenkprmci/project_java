@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${restaurant.name}"></title>
+</head>
+<body>
+
+<h1 th:text="${restaurant.name}"></h1>
+<p th:text="${restaurant.location}"></p>
+<p th:text="${restaurant.description}"></p>
+
+<h2>Menus:</h2>
+<ul>
+  <li th:each="menu : ${menus}">
+    <h3 th:text="${menu.id}"></h3>
+    <!-- Display other menu details as needed -->
+    <ul>
+      <li th:each="item : ${menu.items}">
+        <p th:text="${item.item} + ' - ' + ${item.price}"></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+</body>
+</html>

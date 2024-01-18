@@ -14,7 +14,7 @@
         <th>ID</th>
         <th>Name</th>
         <th>Location</th>
-        <!-- Add more columns as needed -->
+        <th>Action</th>
     </tr>
     </thead>
     <tbody>
@@ -22,7 +22,12 @@
         <td th:text="${restaurant.id}"></td>
         <td th:text="${restaurant.name}"></td>
         <td th:text="${restaurant.location}"></td>
-        <!-- Add more columns as needed -->
+        <td>
+            <!-- Add a button to view restaurant details -->
+            <form th:action="@{/api/restaurants/detail/{id}(id=${restaurant.id})}" method="get">
+                <button type="submit">View Details</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
